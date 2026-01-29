@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Edu - Analyse de la Concentration</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+    <!-- ============= HEADER ============= -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="logo.png" alt="Focus Edu Logo" class="logo">
+                <h1>Focus Edu</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" data-section="questionnaire-eleves">Élèves</button>
+                <button class="nav-btn" data-section="questionnaire-enseignants">Enseignants</button>
+                <button class="nav-btn" data-section="resultats">Résultats</button>
+                <button id="logout-btn" class="btn logout hidden">Déconnexion</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============= MODAL LOGIN ============= -->
+    <div id="login-modal" class="login-modal hidden">
+        <div class="login-container">
+            <div class="login-box">
+                <h2>Accès Résultats</h2>
+                <p>Veuillez entrer le mot de passe pour accéder aux résultats et analyses.</p>
+                <form id="login-form">
+                        <input type="password" id="login-password" placeholder="Mot de passe" required>
+                    <button type="submit" class="btn btn-primary">Connexion</button>
+                </form>
+                <p class="login-error" id="login-error" style="display:none; color:#e74c3c; margin-top:1rem;">Mot de passe incorrect</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============= CONTENU PRINCIPAL ============= -->
+    <main class="main-content">
+
+        <!-- ===== SECTION 1 : ACCUEIL ===== -->
+        <section id="accueil" class="section active">
+            <div class="container">
+                <h2>Bienvenue sur Focus Edu</h2>
+                <p class="intro-text">
+                    Focus Edu est une plateforme académique de collecte et d'analyse automatique de données sur la concentration des élèves et des enseignants dans un établissement scolaire.
+                </p>
+
+                <div class="info-card">
+                    <h3>Objectif de l'étude</h3>
+                    <p>
+                        Ce projet s'inscrit dans un mémoire universitaire en sciences de l'éducation. 
+                        Il vise à mesurer et analyser les niveaux de concentration des élèves et des enseignants,
+                        en tenant compte des variables contextuelles (moment de la journée, classe, caractéristiques démographiques).
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Confidentialité et Anonymat</h3>
+                    <p>
+                        ✓ Aucune donnée personnelle identifiante ne sera collectée<br>
+                        ✓ Les réponses sont stockées de manière anonyme sur votre appareil<br>
+                        ✓ Aucune transmission de données vers un serveur externe<br>
+                        ✓ Vous pouvez consulter ou supprimer vos données à tout moment
+                    </p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="FocusEdu.UI.navigateTo('questionnaire-eleves')">
+                        Je suis un élève
+                    </button>
+                    <button class="btn btn-secondary" onclick="FocusEdu.UI.navigateTo('questionnaire-enseignants')">
+                        Je suis un enseignant
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 2 : QUESTIONNAIRE ÉLÈVES ===== -->
+        <section id="questionnaire-eleves" class="section">
+            <div class="container">
+                <h2>Questionnaire destiné aux élèves</h2>
+                <p class="section-subtitle">Vos réponses nous aident à mieux comprendre les facteurs affectant la concentration.</p>
+
+                <form id="form-eleves" class="questionnaire-form">
+                    <!-- Identité -->
+                    <fieldset class="identity-section">
+                        <legend>Identifiez-vous (pour anti-doublon)</legend>
+                        <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1rem;">Ces informations permettent de vérifier que vous n'avez répondu qu'une seule fois.</p>
+                        <div class="form-group">
+                            <label for="eleves-nom">Nom :</label>
+                            <input type="text" id="eleves-nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eleves-prenom">Prénom :</label>
+                            <input type="text" id="eleves-prenom" name="prenom" required>
+                        </div>
+                    </fieldset>
+
+                    <!-- Partie A : Informations générales -->
+                    <fieldset class="context-section">
+                        <legend>Partie A : Informations générales</legend>
+                        <div class="form-group">
+                            <label for="eleves-age">Âge :</label>
+                            <input type="number" id="eleves-age" name="age" min="10" max="25" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sexe :</label>
+                            <label><input type="radio" name="sexe" value="Masculin" required> Masculin</label>
+                            <label><input type="radio" name="sexe" value="Féminin"> Féminin</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="eleves-classe">Classe :</label>
+                            <input type="text" id="eleves-classe" name="classe" placeholder="Ex: 3ème" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eleves-moment">Moment de la journée :</label>
+                            <select id="eleves-moment" name="moment" required>
+                                <option value="">-- Sélectionnez --</option>
+                                <option value="matin">Matin</option>
+                                <option value="apres-midi">Après-midi</option>
+                                <option value="indifferent">Indifférent</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Partie B : Concentration en classe -->
+                    <fieldset class="questions-section">
+                        <legend>Partie B : Concentration en classe</legend>
+
+                        <div class="question-group">
+                            <label class="question-label">1. Arrivez-vous facilement à rester attentif pendant les cours ?</label>
+                            <div class="likert-scale">
+                                <label><input type="radio" name="q1" value="Oui, toujours" required> Oui, toujours</label>
+                                <label><input type="radio" name="q1" value="Parfois"> Parfois</label>
+                                <label><input type="radio" name="q1" value="Rarement"> Rarement</label>
+                                <label><input type="radio" name="q1" value="Jamais"> Jamais</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">2. Quelles sont les principales distractions qui vous empêchent de vous concentrer ?</label>
+                            <label><input type="checkbox" name="q2" value="Téléphone portable / réseaux sociaux"> Téléphone portable / réseaux sociaux</label>
+                            <label><input type="checkbox" name="q2" value="Discussions avec camarades"> Discussions avec camarades</label>
+                            <label><input type="checkbox" name="q2" value="Bruit dans la classe"> Bruit dans la classe</label>
+                            <label><input type="checkbox" name="q2" value="Fatigue / manque de sommeil"> Fatigue / manque de sommeil</label>
+                            <label><input type="checkbox" name="q2" value="Autres"> Autres (préciser) : <input type="text" name="q2_autre" placeholder="Précisez"></label>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">3. Dans quelles matières avez-vous le plus de difficultés à rester concentré ?</label>
+                            <label><input type="checkbox" name="q3" value="Mathématiques"> Mathématiques</label>
+                            <label><input type="checkbox" name="q3" value="Français"> Français</label>
+                            <label><input type="checkbox" name="q3" value="Sciences"> Sciences</label>
+                            <label><input type="checkbox" name="q3" value="Histoire-Géographie"> Histoire-Géographie</label>
+                            <label><input type="checkbox" name="q3" value="Autres"> Autres : <input type="text" name="q3_autre" placeholder="Précisez"></label>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">4. Pensez-vous que votre manque de concentration influence vos résultats scolaires ?</label>
+                            <div class="likert-scale">
+                                <label><input type="radio" name="q4" value="Oui, beaucoup" required> Oui, beaucoup</label>
+                                <label><input type="radio" name="q4" value="Oui, un peu"> Oui, un peu</label>
+                                <label><input type="radio" name="q4" value="Non"> Non</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">5. Quelles stratégies utilisez-vous pour améliorer votre concentration ?</label>
+                            <label><input type="checkbox" name="q5" value="Prendre des notes"> Prendre des notes</label>
+                            <label><input type="checkbox" name="q5" value="Éviter les distractions"> Éviter les distractions</label>
+                            <label><input type="checkbox" name="q5" value="Demander de l'aide à l'enseignant"> Demander de l'aide à l'enseignant</label>
+                            <label><input type="checkbox" name="q5" value="Autres"> Autres : <input type="text" name="q5_autre" placeholder="Précisez"></label>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-primary btn-large">Soumettre mes réponses</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 3 : QUESTIONNAIRE ENSEIGNANTS ===== -->
+        <section id="questionnaire-enseignants" class="section">
+            <div class="container">
+                <h2>Questionnaire destiné aux enseignants</h2>
+                <p class="section-subtitle">Vos observations nous aident à valider les données collectées auprès des élèves.</p>
+
+                <form id="form-enseignants" class="questionnaire-form">
+                    <fieldset class="identity-section">
+                        <legend>Identifiez-vous (pour anti-doublon)</legend>
+                        <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1rem;">Ces informations permettent de vérifier que vous n'avez répondu qu'une seule fois.</p>
+                        <div class="form-group"><label for="enseignants-nom">Nom :</label><input type="text" id="enseignants-nom" name="nom" required></div>
+                        <div class="form-group"><label for="enseignants-prenom">Prénom :</label><input type="text" id="enseignants-prenom" name="prenom" required></div>
+                    </fieldset>
+
+                    <fieldset class="context-section">
+                        <legend>Partie A : Informations générales</legend>
+                        <div class="form-group">
+                            <label>Sexe :</label>
+                            <label><input type="radio" name="sexe" value="Masculin" required> Masculin</label>
+                            <label><input type="radio" name="sexe" value="Féminin"> Féminin</label>
+                        </div>
+                        <div class="form-group"><label for="enseignants-matiere">Matière enseignée :</label><input type="text" id="enseignants-matiere" name="matiere" required></div>
+                        <div class="form-group"><label for="enseignants-experience">Années d'expérience :</label><input type="number" id="enseignants-experience" name="experience" min="0" required></div>
+                        <div class="form-group">
+                            <label for="enseignants-moment">Moment de l'observation :</label>
+                            <select id="enseignants-moment" name="moment" required>
+                                <option value="">-- Sélectionnez --</option>
+                                <option value="matin">Matin</option>
+                                <option value="apres-midi">Après-midi</option>
+                                <option value="indifferent">Indifférent</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="questions-section">
+                        <legend>Partie B : Observation de la concentration des élèves</legend>
+
+                        <div class="question-group">
+                            <label class="question-label">1. Dans cette classe, le niveau de concentration général est :</label>
+                            <div class="likert-scale">
+                                <label><input type="radio" name="q1" value="Pas du tout" required> Pas du tout</label>
+                                <label><input type="radio" name="q1" value="Peu"> Peu</label>
+                                <label><input type="radio" name="q1" value="Assez"> Assez</label>
+                                <label><input type="radio" name="q1" value="Tout à fait"> Tout à fait</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">2. Quelles manifestations remarquez-vous ? (plusieurs réponses possibles)</label>
+                            <label><input type="checkbox" name="q2" value="Manque d'intérêt"> Manque d'intérêt</label>
+                            <label><input type="checkbox" name="q2" value="Usage d'appareils"> Usage d'appareils</label>
+                            <label><input type="checkbox" name="q2" value="Problèmes de santé"> Problèmes de santé</label>
+                            <label>Autre (précisez): <input type="text" name="q2_autre" placeholder="Précisez"></label>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">3. Quels effets observez-vous ? (plusieurs)</label>
+                            <label><input type="checkbox" name="q4" value="Baisse des notes"> Baisse des notes</label>
+                            <label><input type="checkbox" name="q4" value="Retard"> Retard</label>
+                            <label><input type="checkbox" name="q4" value="Désengagement"> Désengagement</label>
+                            <label><input type="checkbox" name="q4" value="Perturbation"> Perturbation</label>
+                        </div>
+
+                        <div class="question-group">
+                            <label class="question-label">4. Quelles stratégies recommandez-vous ? (plusieurs)</label>
+                            <label><input type="checkbox" name="q5" value="Réorganiser la classe"> Réorganiser la classe</label>
+                            <label><input type="checkbox" name="q5" value="Activités stimulantes"> Activités stimulantes</label>
+                            <label><input type="checkbox" name="q5" value="Rencontres parents"> Rencontres parents</label>
+                            <label>Autre (précisez): <input type="text" name="q5_autre" placeholder="Précisez"></label>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-primary btn-large">Soumettre mes observations</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 4 : RÉSULTATS ===== -->
+        <section id="resultats" class="section">
+            <div class="container">
+                <h2>Résultats et Analyse</h2>
+
+                <!-- Dernier résultat individuel -->
+                <div id="dernier-resultat" class="dernier-resultat" style="display:none;">
+                    <h3>Votre dernier questionnaire</h3>
+                    <div class="score-card">
+                        <div class="score-display">
+                            <span class="score-number" id="score-derniere-session">--</span>
+                            <span class="score-percent">%</span>
+                        </div>
+                        <p class="score-classification" id="classification-derniere-session">--</p>
+                    </div>
+                </div>
+
+                <!-- Analyse globale -->
+                <div id="analyse-globale">
+                    <h3>Analyse Globale</h3>
+
+                    <div class="stats-overview">
+                        <div class="stat-card">
+                            <h4>Total des sessions</h4>
+                            <p class="stat-value" id="total-sessions">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Score moyen</h4>
+                            <p class="stat-value" id="score-moyen">--</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Sessions élèves</h4>
+                            <p class="stat-value" id="sessions-eleves">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Sessions enseignants</h4>
+                            <p class="stat-value" id="sessions-enseignants">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Distribution concentration -->
+                    <div class="chart-container">
+                        <h4>Distribution de la concentration</h4>
+                        <canvas id="chart-distribution"></canvas>
+                    </div>
+
+                    <!-- Comparaison élèves/enseignants -->
+                    <div class="chart-container" id="comparaison-container" style="display:none;">
+                        <h4>Comparaison Élèves vs Enseignants</h4>
+                        <canvas id="chart-comparaison"></canvas>
+                    </div>
+
+                    <!-- Analyse par variables contextuelles (élèves) -->
+                    <div id="analyse-contexte" style="display:none;">
+                        <h3>Analyse par variables contextuelles (Élèves)</h3>
+
+                        <div class="analyse-section">
+                            <h4>Par moment de la journée</h4>
+                            <canvas id="chart-moment"></canvas>
+                        </div>
+
+                        <div class="analyse-section">
+                            <h4>Par classe</h4>
+                            <canvas id="chart-classe"></canvas>
+                        </div>
+
+                        <div class="analyse-section">
+                            <h4>Par sexe</h4>
+                            <canvas id="chart-sexe"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Table détaillée -->
+                    <div class="table-container" id="table-container" style="display:none;">
+                        <h4>Détail des sessions</h4>
+                        <table id="sessions-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Identité</th>
+                                    <th>Contexte</th>
+                                    <th>Score</th>
+                                    <th>Catégorie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions-section">
+                    <button class="btn btn-secondary" id="btn-export-csv">📥 Exporter les données (CSV)</button>
+                    <button class="btn btn-secondary" id="btn-export-pdf">📄 Exporter résultats (PDF)</button>
+                    <button class="btn btn-danger" id="btn-clear-data" onclick="if(confirm('Êtes-vous sûr ? Cette action est irréversible.')) FocusEdu.Data.clearAllData();">🗑️ Effacer toutes les données</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 5 : À PROPOS ===== -->
+        <section id="apropos" class="section">
+            <div class="container">
+                <h2>À propos de ce projet</h2>
+
+                <div class="info-card">
+                    <h3>Contexte académique</h3>
+                    <p>
+                        Focus Edu est développé dans le cadre d'un mémoire universitaire en sciences de l'éducation.
+                        L'objectif principal est de collecter des données empiriques sur la concentration des élèves et des enseignants
+                        afin d'identifier les facteurs influençant la performance cognitive et l'engagement en classe.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Méthodologie</h3>
+                    <p>
+                        <strong>Approche :</strong> Collecte de données auto-rapportées et d'observations structurées<br>
+                        <strong>Population :</strong> Élèves (6ème à Terminale) et enseignants<br>
+                        <strong>Instruments :</strong> Questionnaires utilisant des échelles de Likert (1-4)<br>
+                        <strong>Analyse :</strong> Calculs de scores, analyses comparatives, segmentation par variables contextuelles<br>
+                        <strong>Confidentialité :</strong> Collecte anonyme, données locales, pas de transmission externe
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Variables mesurées</h3>
+                    <p>
+                        <strong>Pour les élèves :</strong><br>
+                        • Capacité de concentration générale<br>
+                        • Distractions (sociales, numériques, environnementales)<br>
+                        • Engagement (prise de notes, questions posées)<br>
+                        • Compréhension du contenu pédagogique<br>
+                        • Impact de la fatigue<br>
+                        • Variables contextuelles (âge, sexe, classe, moment)<br>
+                        <br>
+                        <strong>Pour les enseignants :</strong><br>
+                        • Observation du niveau de concentration global<br>
+                        • Manifestations de distraction<br>
+                        • Comportements d'engagement (participation)<br>
+                        • Indicateurs environnementaux (bruit, fatigue)<br>
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Interprétation des scores</h3>
+                    <p>
+                        <strong>Faible concentration (≤ 50%):</strong> Difficultés significatives de concentration. Intervention recommandée.<br>
+                        <strong>Concentration moyenne (51-75%):</strong> Niveaux de concentration acceptables mais avec marges d'amélioration.<br>
+                        <strong>Bonne concentration (> 75%):</strong> Niveaux de concentration satisfaisants.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Technologies utilisées</h3>
+                    <p>
+                        • <strong>HTML5 :</strong> Structure sémantique<br>
+                        • <strong>CSS3 :</strong> Styles responsifs, mobile-first<br>
+                        • <strong>JavaScript (vanilla) :</strong> Logique applicative, sans dépendances externes<br>
+                        • <strong>Chart.js :</strong> Visualisations graphiques<br>
+                        • <strong>localStorage :</strong> Stockage local des données anonymes
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Conformité et Éthique</h3>
+                    <p>
+                        ✓ Pas de collecte de données personnelles identifiantes<br>
+                        ✓ Consentement implicite (utilisation volontaire)<br>
+                        ✓ Transparence méthodologique (code disponible)<br>
+                        ✓ Anonymat garanti (pas de traçabilité individuelle)<br>
+                        ✓ Données locales (aucune transmission externe)<br>
+                        ✓ Droit à l'oubli (suppression des données possible)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification de résultat -->
+        <div id="notification" class="notification" style="display:none;"></div>
+    </main>
+
+    <!-- ============= FOOTER ============= -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a class="footer-link" onclick="FocusEdu.UI.navigateTo('accueil')">Accueil</a>
+            <a class="footer-link" onclick="FocusEdu.UI.navigateTo('apropos')">À propos</a>
+        </div>
+        <p>&copy; 2026 Focus Edu - Projet académique en sciences de l'éducation</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            📞 Besoin d'aide ? <a href="https://wa.me/22879664863?text=Bonjour%20%3A%20Je%20vous%20contacte%20concernant%20Focus%20Edu" target="_blank" style="color: #27ae60; font-weight: 600;">Contactez-moi sur WhatsApp</a>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

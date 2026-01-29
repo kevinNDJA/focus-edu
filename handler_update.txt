@@ -1,0 +1,14 @@
+Update handleStudentSubmit to:
+1. Accept 5 questions (q1-q5) instead of 10
+2. Remove 'moment' from context (not in new form)
+3. Handle checkbox arrays for q2, q3, q5
+4. Handle optional text fields (q2_autre, q3_autre, q5_autre)
+
+Update handleTeacherSubmit to:
+1. Accept 6 questions (q1-q6) instead of 9
+2. Update context to include matiere and experience instead of moment/classe
+3. Handle checkbox arrays for q2, q3, q4, q5
+4. Handle optional text fields (q2_autre, q3_autre, q4_autre, q5_autre)
+5. Handle q6 as a textarea (text response)
+
+Update getAnswerValues in Export module to handle the new fields properly.
