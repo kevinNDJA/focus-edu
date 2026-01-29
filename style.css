@@ -11,7 +11,7 @@
     --light-bg: #f8f9fa;
     --white: #ffffff;
     --text-dark: #2c3e50;
-    --text-light: #7f8c8d;
+    --text-light: #f8fbfc;
     --border-color: #e0e0e0;
     --success-color: #27ae60;
     --warning-color: #f39c12;
@@ -668,25 +668,38 @@ legend {
 
 /* ===== FOOTER ===== */
 .footer {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: var(--spacing-lg);
+    background: #000;
+    color: #71767b;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    padding: 1.2rem 1rem;
     text-align: center;
-    margin-top: var(--spacing-xl);
 }
 
-.footer p {
-    margin: 0;
-    font-size: 0.95rem;
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.4rem;
 }
 
-.footer a {
-    color: var(--secondary-color);
+.footer-links a {
+    color: #71767b;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.footer a:hover {
+.footer-links a:hover {
     text-decoration: underline;
 }
+
+.footer-copy {
+    margin: 0;
+    line-height: 1.4;
+}
+
+
 
 /* ============================================
    RESPONSIVE DESIGN (Mobile-first)

@@ -133,7 +133,8 @@
                         <legend>Partie B : Concentration en classe</legend>
 
                         <div class="question-group">
-                            <label class="question-label">1. Arrivez-vous facilement à rester attentif pendant les cours ?</label>
+                            <label class="question-label">
+                            1. Arrivez-vous facilement à rester attentif pendant les cours ?</label>
                             <div class="likert-scale">
                                 <label><input type="radio" name="q1" value="Oui, toujours" required> Oui, toujours</label>
                                 <label><input type="radio" name="q1" value="Parfois"> Parfois</label>
@@ -143,7 +144,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">2. Quelles sont les principales distractions qui vous empêchent de vous concentrer ?</label>
+                            <label class="question-label">
+                            2. Quelles sont les principales distractions qui vous empêchent de vous concentrer ?</label>
                             <label><input type="checkbox" name="q2" value="Téléphone portable / réseaux sociaux"> Téléphone portable / réseaux sociaux</label>
                             <label><input type="checkbox" name="q2" value="Discussions avec camarades"> Discussions avec camarades</label>
                             <label><input type="checkbox" name="q2" value="Bruit dans la classe"> Bruit dans la classe</label>
@@ -152,7 +154,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">3. Dans quelles matières avez-vous le plus de difficultés à rester concentré ?</label>
+                            <label class="question-label">
+                            3. Dans quelles matières avez-vous le plus de difficultés à rester concentré ?</label>
                             <label><input type="checkbox" name="q3" value="Mathématiques"> Mathématiques</label>
                             <label><input type="checkbox" name="q3" value="Français"> Français</label>
                             <label><input type="checkbox" name="q3" value="Sciences"> Sciences</label>
@@ -161,7 +164,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">4. Pensez-vous que votre manque de concentration influence vos résultats scolaires ?</label>
+                            <label class="question-label">
+                            4. Pensez-vous que votre manque de concentration influence vos résultats scolaires ?</label>
                             <div class="likert-scale">
                                 <label><input type="radio" name="q4" value="Oui, beaucoup" required> Oui, beaucoup</label>
                                 <label><input type="radio" name="q4" value="Oui, un peu"> Oui, un peu</label>
@@ -170,7 +174,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">5. Quelles stratégies utilisez-vous pour améliorer votre concentration ?</label>
+                            <label class="question-label">
+                            5. Quelles stratégies utilisez-vous pour améliorer votre concentration ?</label>
                             <label><input type="checkbox" name="q5" value="Prendre des notes"> Prendre des notes</label>
                             <label><input type="checkbox" name="q5" value="Éviter les distractions"> Éviter les distractions</label>
                             <label><input type="checkbox" name="q5" value="Demander de l'aide à l'enseignant"> Demander de l'aide à l'enseignant</label>
@@ -221,7 +226,8 @@
                         <legend>Partie B : Observation de la concentration des élèves</legend>
 
                         <div class="question-group">
-                            <label class="question-label">1. Dans cette classe, le niveau de concentration général est :</label>
+                            <label class="question-label">
+                            1. Dans cette classe, le niveau de concentration général est :</label>
                             <div class="likert-scale">
                                 <label><input type="radio" name="q1" value="Pas du tout" required> Pas du tout</label>
                                 <label><input type="radio" name="q1" value="Peu"> Peu</label>
@@ -231,7 +237,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">2. Quelles manifestations remarquez-vous ? (plusieurs réponses possibles)</label>
+                            <label class="question-label">
+                            2. Quelles manifestations remarquez-vous ? (plusieurs réponses possibles)</label>
                             <label><input type="checkbox" name="q2" value="Manque d'intérêt"> Manque d'intérêt</label>
                             <label><input type="checkbox" name="q2" value="Usage d'appareils"> Usage d'appareils</label>
                             <label><input type="checkbox" name="q2" value="Problèmes de santé"> Problèmes de santé</label>
@@ -239,7 +246,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">3. Quels effets observez-vous ? (plusieurs)</label>
+                            <label class="question-label">
+                            3. Quels effets observez-vous ? (plusieurs)</label>
                             <label><input type="checkbox" name="q4" value="Baisse des notes"> Baisse des notes</label>
                             <label><input type="checkbox" name="q4" value="Retard"> Retard</label>
                             <label><input type="checkbox" name="q4" value="Désengagement"> Désengagement</label>
@@ -247,7 +255,8 @@
                         </div>
 
                         <div class="question-group">
-                            <label class="question-label">4. Quelles stratégies recommandez-vous ? (plusieurs)</label>
+                            <label class="question-label">
+                            4. Quelles stratégies recommandez-vous ? (plusieurs)</label>
                             <label><input type="checkbox" name="q5" value="Réorganiser la classe"> Réorganiser la classe</label>
                             <label><input type="checkbox" name="q5" value="Activités stimulantes"> Activités stimulantes</label>
                             <label><input type="checkbox" name="q5" value="Rencontres parents"> Rencontres parents</label>
@@ -354,8 +363,8 @@
 
                 <!-- Actions -->
                 <div class="actions-section">
-                    <button class="btn btn-secondary" id="btn-export-csv">📥 Exporter les données (CSV)</button>
-                    <button class="btn btn-secondary" id="btn-export-pdf">📄 Exporter résultats (PDF)</button>
+                    <button class="btn btn-secondary" id="btn-export-csv"> Exporter les données (CSV)</button>
+                    <button class="btn btn-secondary" id="btn-export-pdf"> Exporter résultats (PDF)</button>
                     <button class="btn btn-danger" id="btn-clear-data" onclick="if(confirm('Êtes-vous sûr ? Cette action est irréversible.')) FocusEdu.Data.clearAllData();">🗑️ Effacer toutes les données</button>
                 </div>
             </div>
@@ -445,15 +454,20 @@
 
     <!-- ============= FOOTER ============= -->
     <footer class="footer">
-        <div class="footer-links">
-            <a class="footer-link" onclick="FocusEdu.UI.navigateTo('accueil')">Accueil</a>
-            <a class="footer-link" onclick="FocusEdu.UI.navigateTo('apropos')">À propos</a>
-        </div>
-        <p>&copy; 2026 Focus Edu - Projet académique en sciences de l'éducation</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-            📞 Besoin d'aide ? <a href="https://wa.me/22879664863?text=Bonjour%20%3A%20Je%20vous%20contacte%20concernant%20Focus%20Edu" target="_blank" style="color: #27ae60; font-weight: 600;">Contactez-moi sur WhatsApp</a>
-        </p>
-    </footer>
+    <nav class="footer-links">
+        <a onclick="FocusEdu.UI.navigateTo('accueil')">Accueil</a>
+        <a onclick="FocusEdu.UI.navigateTo('apropos')">À propos</a>
+        <a href="https://wa.me/22879664863?text=Bonjour%20:%20Je%20vous%20contacte%20concernant%20Focus%20Edu"
+           target="_blank" rel="noopener">
+            contactez-nous
+        </a>
+    </nav>
+
+    <p class="footer-copy">
+        © 2026 Focus Edu · Projet académique
+    </p>
+</footer>
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
